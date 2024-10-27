@@ -36,8 +36,8 @@ Wallet Master is an API-based Financial Management System built with Laravel 11,
 
 1. **Clone the Repository**
     ```bash
-    git clone https://github.com/yourusername/financial-management-api.git
-    cd financial-management-api
+    git clone https://github.com/ronykader/wallet-master.git
+    cd wallet-master
     ```
 
 2. **Install Dependencies**
