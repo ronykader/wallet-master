@@ -4,6 +4,7 @@ namespace App\Http\Controllers\API\v1;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\v1\CategoryRequest;
+use App\Http\Resources\v1\CategoryResource;
 use App\Services\v1\CategoryService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -19,7 +20,7 @@ class CategoryController extends Controller
     public function index(): JsonResponse
     {
         $categories = $this->categoryService->getAllCategories();
-        return response()->json($categories);
+        return response()->json(CategoryResource::collection($categories));
     }
     /**
      * Store a newly created resource in storage.
@@ -27,7 +28,7 @@ class CategoryController extends Controller
     public function store(CategoryRequest $request): JsonResponse
     {
         $category = $this->categoryService->createCategory($request->validated());
-        return response()->json(['message' => 'Category created successfully', 'data' => $category], 201);
+        return response()->json(['message' => 'Category created successfully', 'data' => new CategoryResource($category)], 201);
     }
 
     /**
@@ -36,7 +37,7 @@ class CategoryController extends Controller
     public function show(int $id): JsonResponse
     {
         $category = $this->categoryService->getCategoryById($id);
-        return response()->json($category);
+        return response()->json(new CategoryResource($category));
     }
 
     /**
@@ -45,7 +46,7 @@ class CategoryController extends Controller
     public function update(CategoryRequest $request, int $id): JsonResponse
     {
         $category = $this->categoryService->updateCategory($id, $request->validated());
-        return response()->json(['message' => 'Category updated successfully', 'data' => $category]);
+        return response()->json(['message' => 'Category updated successfully', 'data' => new CategoryResource($category)]);
     }
 
     /**
