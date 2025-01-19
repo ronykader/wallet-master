@@ -28,7 +28,8 @@ class CategoryController extends Controller
 
     public function show(Category $category)
     {
-        return new CategoryResource($category);
+        $categoryData = $this->categoryService->getCategoryById($category);
+        return new CategoryResource($categoryData);
     }
 
     public function store(StoreRequest $request)
@@ -41,6 +42,14 @@ class CategoryController extends Controller
     public function update(UpdateRequest $request, Category $category)
     {
         $updatedCategory = $this->categoryService->updateCategory($category, $request->validated());
+        return new CategoryResource($updatedCategory);
+    }
+
+
+    public function destroy(Category $category)
+    {
+        $this->categoryService->deleteCategory($category);
+        return response()->json(['message' => 'Category Deleted Successfully'], 200);
     }
 
 
