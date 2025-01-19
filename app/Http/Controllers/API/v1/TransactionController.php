@@ -31,7 +31,7 @@ class TransactionController extends Controller
     public function store(TransactionRequest $request): JsonResponse
     {
         $transaction = $this->transactionService->createTransaction($request->validated());
-        return response()->json(['message' => 'Category created successfully', 'data' => new TransactionResource($transaction)], 201);
+        return response()->json(['message' => 'Transaction created successfully', 'data' => new TransactionResource($transaction)], 201);
     }
 
     /**
