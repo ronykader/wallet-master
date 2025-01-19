@@ -2,7 +2,6 @@
 
 namespace App\Repositories\v1\interfaces;
 
-use App\Models\Category;
 use App\Models\Transaction;
 use Illuminate\Database\Eloquent\Collection;
 
