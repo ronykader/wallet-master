@@ -10,7 +10,7 @@ use App\Services\v1\AccountService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
-class AccountCountroller extends Controller
+class AccountController extends Controller
 {
     public function __construct(private readonly AccountService $accountService)
     {
