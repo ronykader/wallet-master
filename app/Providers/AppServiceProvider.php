@@ -25,13 +25,18 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        $this->app->bind(CategoryRepositoryInterface::class, CategoryRepository::class);
-        $this->app->bind(AccountRepositoryInterface::class, AccountRepository::class);
-        $this->app->bind(BudgetRepositoryInterface::class, BudgetRepository::class);
-        $this->app->bind(FamilyMemberRepositoryInterface::class, FamilyMemberRepository::class);
-        $this->app->bind(OrganizationRepositoryInterface::class, OrganizationRepository::class);
-        $this->app->bind(SubscriptionPlanRepositoryInterface::class, SubscriptionPlanRepository::class);
-        $this->app->bind(TransactionRepositoryInterface::class, TransactionRepository::class);
+        $repositories = [
+            CategoryRepositoryInterface::class => CategoryRepository::class,
+            AccountRepositoryInterface::class => AccountRepository::class,
+            BudgetRepositoryInterface::class => BudgetRepository::class,
+            FamilyMemberRepositoryInterface::class => FamilyMemberRepository::class,
+            OrganizationRepositoryInterface::class => OrganizationRepository::class,
+            SubscriptionPlanRepositoryInterface::class => SubscriptionPlanRepository::class,
+            TransactionRepositoryInterface::class => TransactionRepository::class,
+        ];
+        foreach ($repositories as $interface => $implementation) {
+            $this->app->bind($interface, $implementation);
+        }
     }
 
     /**
